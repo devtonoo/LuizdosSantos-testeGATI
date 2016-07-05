@@ -5,23 +5,136 @@ import java.beans.PropertyChangeSupport;
 
 /**
  *
- * @author Luiz Fernando dos Santos em homeoffice
+ * @author homeoffice
  */
 public class Cliente {
-    
+   
     private String nome;
-    private String nomeEntreda;
+    private String email;
+    private String telefone;
+    private String endereco;
+    private int numero;
+    private String bairro;
+    private int cep;
+    private boolean ativo;
 
-    public static final String PROP_NOMEENTREDA = "nomeEntreda";
+    public static final String PROP_ATIVO = "ativo";
 
-    public String getNomeEntreda() {
-        return nomeEntreda;
+    public boolean isAtivo() {
+        return ativo;
     }
 
-    public void setNomeEntreda(String nomeEntreda) {
-        String oldNomeEntreda = this.nomeEntreda;
-        this.nomeEntreda = nomeEntreda;
-        propertyChangeSupport.firePropertyChange(PROP_NOMEENTREDA, oldNomeEntreda, nomeEntreda);
+    public void setAtivo(boolean ativo) {
+        boolean oldAtivo = this.ativo;
+        this.ativo = ativo;
+        propertyChangeSupport.firePropertyChange(PROP_ATIVO, oldAtivo, ativo);
+    }
+
+    
+    public static final String PROP_CEP = "cep";
+
+    public int getCep() {
+        return cep;
+    }
+
+    public void setCep(int cep) {
+        int oldCep = this.cep;
+        this.cep = cep;
+        propertyChangeSupport.firePropertyChange(PROP_CEP, oldCep, cep);
+    }
+
+    
+    public static final String PROP_BAIRRO = "bairro";
+
+    /**
+     * Get the value of bairro
+     *
+     * @return the value of bairro
+     */
+    public String getBairro() {
+        return bairro;
+    }
+
+    /**
+     * Set the value of bairro
+     *
+     * @param bairro new value of bairro
+     */
+    public void setBairro(String bairro) {
+        String oldBairro = this.bairro;
+        this.bairro = bairro;
+        propertyChangeSupport.firePropertyChange(PROP_BAIRRO, oldBairro, bairro);
+    }
+
+    
+    
+    
+    public static final String PROP_NUMERO = "numero";
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        int oldNumero = this.numero;
+        this.numero = numero;
+        propertyChangeSupport.firePropertyChange(PROP_NUMERO, oldNumero, numero);
+    }
+
+    
+    
+    
+    
+    public static final String PROP_ENDERECO = "endereco";
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        String oldEndereco = this.endereco;
+        this.endereco = endereco;
+        propertyChangeSupport.firePropertyChange(PROP_ENDERECO, oldEndereco, endereco);
+    }
+
+    
+    
+    
+    public static final String PROP_TELEFONE = "telefone";
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        String oldTelefone = this.telefone;
+        this.telefone = telefone;
+        propertyChangeSupport.firePropertyChange(PROP_TELEFONE, oldTelefone, telefone);
+    }
+
+    public static final String PROP_EMAIL = "email";
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        String oldEmail = this.email;
+        this.email = email;
+        propertyChangeSupport.firePropertyChange(PROP_EMAIL, oldEmail, email);
+    }
+
+
+    public static final String PROP_NOME = "nome";
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        String oldNome = this.nome;
+        this.nome = nome;
+        propertyChangeSupport.firePropertyChange(PROP_NOME, oldNome, nome);
     }
 
     private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
@@ -34,111 +147,11 @@ public class Cliente {
         propertyChangeSupport.removePropertyChangeListener(listener);
     }
 
-    private String email;
-    private String emailEntrada;
-
-    public static final String PROP_EMAILENTRADA = "emailEntrada";
-
-    public String getEmailEntrada() {
-        return emailEntrada;
-    }
-
-    public void setEmailEntrada(String emailEntrada) {
-        String oldEmailEntrada = this.emailEntrada;
-        this.emailEntrada = emailEntrada;
-        propertyChangeSupport.firePropertyChange(PROP_EMAILENTRADA, oldEmailEntrada, emailEntrada);
-    }
-
-    private String telefone;
-    private String telefoneEntreda;
-
-    public static final String PROP_TELEFONEENTREDA = "telefoneEntreda";
-
-    public String getTelefoneEntreda() {
-        return telefoneEntreda;
-    }
-
-    public void setTelefoneEntreda(String telefoneEntreda) {
-        String oldTelefoneEntreda = this.telefoneEntreda;
-        this.telefoneEntreda = telefoneEntreda;
-        propertyChangeSupport.firePropertyChange(PROP_TELEFONEENTREDA, oldTelefoneEntreda, telefoneEntreda);
-    }
-
-    private String endereco;
-    private String enderecoEntreda;
-
-    public static final String PROP_ENDERECOENTREDA = "enderecoEntreda";
-
-    public String getEnderecoEntreda() {
-        return enderecoEntreda;
-    }
-
-    public void setEnderecoEntreda(String enderecoEntreda) {
-        String oldEnderecoEntreda = this.enderecoEntreda;
-        this.enderecoEntreda = enderecoEntreda;
-        propertyChangeSupport.firePropertyChange(PROP_ENDERECOENTREDA, oldEnderecoEntreda, enderecoEntreda);
-    }
-
-    private int numero;
-    private int numeroEntrada;
-
-    public static final String PROP_NUMEROENTRADA = "numeroEntrada";
-
-    public int getNumeroEntrada() {
-        return numeroEntrada;
-    }
-
-    public void setNumeroEntrada(int numeroEntrada) {
-        int oldNumeroEntrada = this.numeroEntrada;
-        this.numeroEntrada = numeroEntrada;
-        propertyChangeSupport.firePropertyChange(PROP_NUMEROENTRADA, oldNumeroEntrada, numeroEntrada);
-    }
-
-    private String bairro;
-    private String bairroEntrada;
-
-    public static final String PROP_BAIRROENTRADA = "bairroEntrada";
-
-    public String getBairroEntrada() {
-        return bairroEntrada;
-    }
-
-    public void setBairroEntrada(String bairroEntrada) {
-        String oldBairroEntrada = this.bairroEntrada;
-        this.bairroEntrada = bairroEntrada;
-        propertyChangeSupport.firePropertyChange(PROP_BAIRROENTRADA, oldBairroEntrada, bairroEntrada);
-    }
-
-    private int cep;
-    private int cepEntrada;
-
-    public static final String PROP_CEPENTRADA = "cepEntrada";
-
-    public int getCepEntrada() {
-        return cepEntrada;
-    }
-
-    public void setCepEntrada(int cepEntrada) {
-        int oldCepEntrada = this.cepEntrada;
-        this.cepEntrada = cepEntrada;
-        propertyChangeSupport.firePropertyChange(PROP_CEPENTRADA, oldCepEntrada, cepEntrada);
-    }
-
-    private boolean ativo;
-   
-    public Cliente(String nome, String email, String telefone, String endereco,
-            int numero, String bairro, int cep, char ativo){
-        setNome(nome);
-        setEmail(email);
-        setTelefone(telefone);
-        setEndereco(endereco);
-        setNumero(numero);
-        setBairro(bairro);
-        setCep(cep);
-        if(ativo=='S' || ativo=='s')
-            this.ativo = true;
-        else
-            this.ativo = false;
+    public Cliente(){
+      //  if(ativo=='S' || ativo=='s')
+       //     this.ativo = true;
+        //else
+         //   this.ativo = false;
     }
     
     public void exibeDados(){
@@ -159,59 +172,5 @@ public class Cliente {
         if(!isAtivo())
             System.out.println("Cliente inativo! ");
         
-    }
-        
-    public void setNome(String n){
-        this.nome = n;
-    }
-    public String getNome(){
-        return this.nome;
-    }
-    
-    public void setEmail(String e){
-        this.email = e;
-    }
-    public String getEmail(){
-        return this.email;
-    }
-    
-    public void setTelefone(String t){
-        this.telefone = t;
-    }
-    public String getTelefone(){
-        return this.telefone;
-    }
-    
-    public void setEndereco(String e){
-        this.endereco = e;
-    }
-    public String getEndereco(){
-        return this.endereco;
-    }
-    
-    public void setNumero(int num){
-        this.numero = num;
-    }
-    public int getNumero(){
-        return this.numero;
-    }
-    
-    public void setBairro(String b){
-        this.bairro = b;
-    }
-    public String getBairro(){
-        return this.bairro;
-    }
-    
-    public void setCep(int cep){
-        this.cep = cep;
-    }
-    public int getCep(){
-        return this.cep;
-    }
-    
-    public boolean isAtivo(){
-        return this.ativo;
-    }
-            
+    }      
 }
