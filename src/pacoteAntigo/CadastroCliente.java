@@ -57,7 +57,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         listClientes = org.jdesktop.observablecollections.ObservableCollections.observableList(listClientes);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro Clientes GATI");
+        setTitle("GATI  Sistemas  ");
         setName("Cadastro Clientes GATI"); // NOI18N
 
         jButton1.setText("Adicionar Clientes");

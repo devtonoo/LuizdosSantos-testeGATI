@@ -17,7 +17,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Cadastro Clientes GATI"/>
+    <Property name="title" type="java.lang.String" value="GATI  Sistemas  "/>
     <Property name="name" type="java.lang.String" value="Cadastro Clientes GATI" noResource="true"/>
   </Properties>
   <SyntheticProperties>
