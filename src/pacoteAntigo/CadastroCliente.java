@@ -14,7 +14,7 @@ import org.jdesktop.observablecollections.ObservableCollections.*;
  */
 public class CadastroCliente extends javax.swing.JFrame {
     public boolean clienteStatus = false;
-    public Cliente c;
+    public List<Cliente>() c;
     /**
      * Creates new form CadastroCliente
      */
@@ -328,10 +328,11 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        Cliente c;//new Cliente(this.nome,this.email, this.telefone, this.endereco, this.numero, this.bairro, this.cep, this.ativo);
+        //Cliente c;//new Cliente(this.nome,this.email, this.telefone, this.endereco, this.numero, this.bairro, this.cep, this.ativo);
         
-        
-        
+        c = new Cliente<Cliente>(this.nome.getText(),this.email.getText(), this.telefone.getText(), this.endereco.getText(),this.numero.getComponentCount(), this.bairro.getText(), this.cep.getComponentCount() , true);
+        listClientes.add(c.[tamanhoArray]);
+        tamanhoArray++;
         
         int numerolinhas = TabelaCadastro.getRowCount()-1;
         TabelaCadastro.setRowSelectionInterval(numerolinhas, numerolinhas);
@@ -358,6 +359,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
         // TODO add your handling code here:
         int i = TabelaCadastro.getSelectedRow();
+        tamanhoArray--;
         listClientes.remove(i);
          
     }//GEN-LAST:event_excluirActionPerformed
@@ -368,10 +370,10 @@ public class CadastroCliente extends javax.swing.JFrame {
         try {
             if(clienteStatus){
                 
-                c = new Cliente(this.nome,this.email, this.telefone, this.endereco, this.numero, this.bairro, this.cep, this.ativo);
-                listClientes.add(c);
+                c.add(new Cliente(this.nome.getText(),this.email.getText(), this.telefone.getText(), this.endereco.getText(),this.numero.getComponentCount(), this.bairro.getText(), this.cep.getComponentCount() , true));
+                
                 ClienteDAO daoAtual = new ClienteDAO();
-                daoAtual.criar(c);
+                daoAtual.criar(c[tamanhoArray]);
                 clienteStatus=false;
 
             }
