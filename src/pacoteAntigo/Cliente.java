@@ -20,6 +20,17 @@ public class Cliente {
 
     public static final String PROP_ATIVO = "ativo";
 
+    public Cliente(String nome,String email, String telefone, String endereco, int numero, String bairro,int cep,boolean ativo){
+        setNome(nome);
+        setEmail(email);
+        setTelefone(telefone);
+        setEndereco(endereco);
+        setNumero(numero);
+        setBairro(bairro);
+        setCep(cep);
+        this.ativo = ativo;
+    }
+    
     public boolean isAtivo() {
         return ativo;
     }

@@ -14,6 +14,7 @@ import org.jdesktop.observablecollections.ObservableCollections.*;
  */
 public class CadastroCliente extends javax.swing.JFrame {
     public boolean clienteStatus = false;
+    public Cliente c;
     /**
      * Creates new form CadastroCliente
      */
@@ -327,20 +328,11 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        Cliente c = new Cliente();//new Cliente(this.nome,this.email, this.telefone, this.endereco, this.numero, this.bairro, this.cep, this.ativo);
-        do{
-            
-        }while(!clienteStatus);
-        try {
-            ClienteDAO daoAtual = new ClienteDAO();
-            daoAtual.criar(c);
-            clienteStatus=false;
-
-        } catch (Exception e) { 
-            JOptionPane.showMessageDialog(null, "Não Conectado!");
-        }
+        Cliente c;//new Cliente(this.nome,this.email, this.telefone, this.endereco, this.numero, this.bairro, this.cep, this.ativo);
         
-        listClientes.add(c);
+        
+        
+        
         int numerolinhas = TabelaCadastro.getRowCount()-1;
         TabelaCadastro.setRowSelectionInterval(numerolinhas, numerolinhas);
         nome.requestFocus();
@@ -371,7 +363,24 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_excluirActionPerformed
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+      
         clienteStatus = true;
+        try {
+            if(clienteStatus){
+                
+                c = new Cliente(this.nome,this.email, this.telefone, this.endereco, this.numero, this.bairro, this.cep, this.ativo);
+                listClientes.add(c);
+                ClienteDAO daoAtual = new ClienteDAO();
+                daoAtual.criar(c);
+                clienteStatus=false;
+
+            }
+
+        } catch (Exception e) { 
+            JOptionPane.showMessageDialog(null, "Não Conectado!");
+        }
+        
+        
     }//GEN-LAST:event_jButton4MouseClicked
       
                                        
