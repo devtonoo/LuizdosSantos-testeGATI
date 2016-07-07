@@ -9,7 +9,11 @@ import javax.swing.JOptionPane;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -19,28 +23,75 @@ import java.sql.SQLException;
 public class Conexao {
     
     private Connection conecta;
+    public static final String DRIVER = "com.mysql.jdbc.Driver";
+    public static final String URL = "jdbc:mysql://localhost/CadastroClienteGATI";
+    public static final String USUARIO = "root";
+    public static final String SENHA = "root";
+            
     //private a;
     //private a;
     
     
-    public Conexao() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        conecta = DriverManager.getConnection("jdbc:mysql://localhost/CadastroClienteGATI", "root", "root");
-        JOptionPane.showMessageDialog(null, "Voce esta conectado com o banco de dados MySql!");
+    public static Connection getConexao() throws ClassNotFoundException, SQLException {
+        
+        Class.forName(DRIVER);
+        return DriverManager.getConnection(URL, USUARIO, SENHA);
+                
     }
+    public static void fechaConexao(Connection c){
+        
+        try {
+            if(c!=null)
+                c.close();
+            else
+                JOptionPane.showMessageDialog(null, "Mantendo conexão aberta! ");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            
+    }
+    
+    public static void fechaConexao(Connection c, PreparedStatement estado){
+        
+        fechaConexao(c);
+        
+        try {
+            if(estado != null)
+                estado.close(); 
+            else
+                JOptionPane.showMessageDialog(null, "Mantendo conexão aberta! ");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            
+    }
+    
+    public static void fechaConexao(Connection c, PreparedStatement estado, ResultSet resultadoConfiguracao){
+        
+        fechaConexao(c, estado);
+        
+        try {
+            if(resultadoConfiguracao != null)
+                resultadoConfiguracao.close(); 
+            else
+                JOptionPane.showMessageDialog(null, "Mantendo conexão aberta! ");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        try {
-            new Conexao();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não Conectado!");
-        }
-        
         CadastroCliente c = new CadastroCliente();
+        
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
