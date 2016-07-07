@@ -5,15 +5,41 @@
  */
 package pacoteAntigo;
 
+import javax.swing.JOptionPane;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+
 /**
  *
  * @author homeoffice
  */
-public class Main {
+public class Conexao {
+    
+    private Connection conecta;
+    //private a;
+    //private a;
+    
+    
+    public Conexao() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        conecta = DriverManager.getConnection("jdbc:mysql://localhost/CadastroClienteGATI", "root", "root");
+        JOptionPane.showMessageDialog(null, "Voce esta conectado com o banco de dados MySql!");
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        try {
+            new Conexao();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não Conectado!");
+        }
+        
         CadastroCliente c = new CadastroCliente();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
