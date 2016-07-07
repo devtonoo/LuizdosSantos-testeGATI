@@ -85,7 +85,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="1176" max="-2" attributes="0"/>
+                          <Component id="tabelajScrollPane1" alignment="0" min="-2" pref="1176" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -97,8 +97,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
-                          <Component id="jButton3" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
+                          <Component id="listarClientesJButton2" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
+                          <Component id="buscarClientesjButton3" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="467" max="-2" attributes="0"/>
                       <Component id="excluir" min="-2" pref="211" max="-2" attributes="0"/>
@@ -162,16 +162,16 @@
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jButton2" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="listarClientesJButton2" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="buscarClientesjButton3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="excluir" max="32767" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="jScrollPane1" min="-2" pref="153" max="-2" attributes="0"/>
+              <Component id="tabelajScrollPane1" min="-2" pref="153" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -195,7 +195,7 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="listarClientesJButton2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Listagem Clientes"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -209,10 +209,10 @@
         <Property name="debugGraphicsOptions" type="int" value="4"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listarClientesJButton2MouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="buscarClientesjButton3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Busca por Clientes"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -226,8 +226,8 @@
         <Property name="debugGraphicsOptions" type="int" value="4"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton3MouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buscarClientesjButton3MouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarClientesjButton3ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelNome">
@@ -272,40 +272,40 @@
     </Component>
     <Component class="javax.swing.JTextField" name="nome">
       <BindingProperties>
-        <BindingProperty name="text" source="TabelaCadastro" sourcePath="${selectedElement.nome}" target="nome" targetPath="text" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="enabled" source="TabelaCadastro" sourcePath="${selectedElement!=null}" target="nome" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="text" source="tabelaLista" sourcePath="${selectedElement.nome}" target="nome" targetPath="text" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="enabled" source="tabelaLista" sourcePath="${selectedElement!=null}" target="nome" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="email">
       <BindingProperties>
-        <BindingProperty name="text" source="TabelaCadastro" sourcePath="${selectedElement.email}" target="email" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="tabelaLista" sourcePath="${selectedElement.email}" target="email" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="TabelaCadastro" sourcePath="${selectedElement!=null}" target="email" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="enabled" source="tabelaLista" sourcePath="${selectedElement!=null}" target="email" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="telefone">
       <BindingProperties>
-        <BindingProperty name="text" source="TabelaCadastro" sourcePath="${selectedElement.telefone}" target="telefone" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="tabelaLista" sourcePath="${selectedElement.telefone}" target="telefone" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="TabelaCadastro" sourcePath="${selectedElement!=null}" target="telefone" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="enabled" source="tabelaLista" sourcePath="${selectedElement!=null}" target="telefone" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="endereco">
       <BindingProperties>
-        <BindingProperty name="text" source="TabelaCadastro" sourcePath="${selectedElement.endereco}" target="endereco" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="tabelaLista" sourcePath="${selectedElement.endereco}" target="endereco" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="TabelaCadastro" sourcePath="${selectedElement!=null}" target="endereco" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="enabled" source="tabelaLista" sourcePath="${selectedElement!=null}" target="endereco" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="numero">
       <BindingProperties>
-        <BindingProperty name="text" source="TabelaCadastro" sourcePath="${selectedElement.numero}" target="numero" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="tabelaLista" sourcePath="${selectedElement.numero}" target="numero" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="TabelaCadastro" sourcePath="${selectedElement!=null}" target="numero" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="enabled" source="tabelaLista" sourcePath="${selectedElement!=null}" target="numero" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="numeroActionPerformed"/>
@@ -313,18 +313,18 @@
     </Component>
     <Component class="javax.swing.JTextField" name="bairro">
       <BindingProperties>
-        <BindingProperty name="text" source="TabelaCadastro" sourcePath="${selectedElement.bairro}" target="bairro" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="tabelaLista" sourcePath="${selectedElement.bairro}" target="bairro" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="TabelaCadastro" sourcePath="${selectedElement!=null}" target="bairro" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="enabled" source="tabelaLista" sourcePath="${selectedElement!=null}" target="bairro" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="cep">
       <BindingProperties>
-        <BindingProperty name="text" source="TabelaCadastro" sourcePath="${selectedElement.cep}" target="cep" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="tabelaLista" sourcePath="${selectedElement.cep}" target="cep" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="TabelaCadastro" sourcePath="${selectedElement!=null}" target="cep" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="enabled" source="tabelaLista" sourcePath="${selectedElement!=null}" target="cep" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="ativo">
@@ -332,8 +332,8 @@
         <Property name="text" type="java.lang.String" value="Ativo"/>
       </Properties>
       <BindingProperties>
-        <BindingProperty name="selected" source="TabelaCadastro" sourcePath="${selectedElement.ativo}" target="ativo" targetPath="selected" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="enabled" source="TabelaCadastro" sourcePath="${selectedElement!=null}" target="ativo" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selected" source="tabelaLista" sourcePath="${selectedElement.ativo}" target="ativo" targetPath="selected" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="enabled" source="tabelaLista" sourcePath="${selectedElement!=null}" target="ativo" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
@@ -344,16 +344,16 @@
         <Property name="text" type="java.lang.String" value="Cadastro de cliente - GATI"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="tabelajScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="TabelaCadastro">
+        <Component class="javax.swing.JTable" name="tabelaLista">
           <BindingProperties>
-            <BindingProperty name="elements" source="listClientes" target="TabelaCadastro" targetPath="elements" updateStrategy="0" immediately="true">
+            <BindingProperty name="elements" source="listClientes" target="tabelaLista" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${nome}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>

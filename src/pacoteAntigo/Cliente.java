@@ -9,6 +9,7 @@ import java.beans.PropertyChangeSupport;
  */
 public class Cliente {
    
+    private int id;
     private String nome;
     private String email;
     private String telefone;
@@ -16,7 +17,7 @@ public class Cliente {
     private int numero;
     private String bairro;
     private int cep;
-    private boolean ativo;
+    public boolean ativo;
 
     public static final String PROP_ATIVO = "ativo";
 
@@ -41,7 +42,13 @@ public class Cliente {
         propertyChangeSupport.firePropertyChange(PROP_ATIVO, oldAtivo, ativo);
     }
 
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public static final String PROP_CEP = "cep";
 
     public int getCep() {
@@ -184,4 +191,6 @@ public class Cliente {
             System.out.println("Cliente inativo! ");
         
     }      
+
+    
 }

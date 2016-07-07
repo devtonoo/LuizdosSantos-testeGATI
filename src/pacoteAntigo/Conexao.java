@@ -24,7 +24,7 @@ public class Conexao {
     
     private Connection conecta;
     public static final String DRIVER = "com.mysql.jdbc.Driver";
-    public static final String URL = "jdbc:mysql://localhost/CadastroClienteGATI";
+    public static final String URL = "jdbc:mysql://localhost:3306/CadastroClienteGATI";
     public static final String USUARIO = "root";
     public static final String SENHA = "root";
             
@@ -34,8 +34,15 @@ public class Conexao {
     
     public static Connection getConexao() throws ClassNotFoundException, SQLException {
         
-        Class.forName(DRIVER);
-        return DriverManager.getConnection(URL, USUARIO, SENHA);
+        try {
+            Class.forName(DRIVER);
+            return DriverManager.getConnection(URL, USUARIO, SENHA);
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Conecao com erro notry da classe Conexao metodo getConexao! "+e);
+            return null;
+        }
+        
                 
     }
     public static void fechaConexao(Connection c){
@@ -47,6 +54,7 @@ public class Conexao {
                 JOptionPane.showMessageDialog(null, "Mantendo conexão aberta! ");
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         
             

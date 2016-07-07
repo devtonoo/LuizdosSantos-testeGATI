@@ -13,12 +13,17 @@ import org.jdesktop.observablecollections.ObservableCollections.*;
  * @author homeoffice
  */
 public class CadastroCliente extends javax.swing.JFrame {
+    
     public boolean clienteStatus = false;
-    public List<Cliente>() c;
+    public int tamanhoArray=0;
+    public Cliente[] c;
+    ClienteDAO daoAtual; 
+    
     /**
      * Creates new form CadastroCliente
      */
     public CadastroCliente() {
+        c = new Cliente[100];
         initComponents();
     }
 
@@ -34,8 +39,8 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         listClientes = new LinkedList<Cliente>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        listarClientesJButton2 = new javax.swing.JButton();
+        buscarClientesjButton3 = new javax.swing.JButton();
         labelNome = new javax.swing.JLabel();
         labelEmal = new javax.swing.JLabel();
         labelTelefone = new javax.swing.JLabel();
@@ -53,8 +58,8 @@ public class CadastroCliente extends javax.swing.JFrame {
         cep = new javax.swing.JTextField();
         ativo = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaCadastro = new javax.swing.JTable();
+        tabelajScrollPane1 = new javax.swing.JScrollPane();
+        tabelaLista = new javax.swing.JTable();
         excluir = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
@@ -75,28 +80,28 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Listagem Clientes");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        listarClientesJButton2.setText("Listagem Clientes");
+        listarClientesJButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        listarClientesJButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        listarClientesJButton2.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        listarClientesJButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                listarClientesJButton2MouseClicked(evt);
             }
         });
 
-        jButton3.setText("Busca por Clientes");
-        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        buscarClientesjButton3.setText("Busca por Clientes");
+        buscarClientesjButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buscarClientesjButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buscarClientesjButton3.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        buscarClientesjButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                buscarClientesjButton3MouseClicked(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        buscarClientesjButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                buscarClientesjButton3ActionPerformed(evt);
             }
         });
 
@@ -116,29 +121,29 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         labelStatus.setText("Status do cliente: ");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), nome, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), nome, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), nome, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.email}"), email, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), email, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), nome, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.telefone}"), telefone, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.email}"), email, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), telefone, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.endereco}"), endereco, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), endereco, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), email, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.numero}"), numero, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.telefone}"), telefone, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), numero, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), telefone, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.endereco}"), endereco, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), endereco, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.numero}"), numero, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), numero, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         numero.addActionListener(new java.awt.event.ActionListener() {
@@ -147,27 +152,27 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bairro}"), bairro, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bairro}"), bairro, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), bairro, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), bairro, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cep}"), cep, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cep}"), cep, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), cep, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), cep, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         ativo.setText("Ativo");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.ativo}"), ativo, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.ativo}"), ativo, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, TabelaCadastro, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), ativo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tabelaLista, org.jdesktop.beansbinding.ELProperty.create("${selectedElement!=null}"), ativo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel9.setText("Cadastro de cliente - GATI");
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listClientes, TabelaCadastro);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listClientes, tabelaLista);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
@@ -195,7 +200,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
 
-        jScrollPane1.setViewportView(TabelaCadastro);
+        tabelajScrollPane1.setViewportView(tabelaLista);
 
         excluir.setText("Excluir cadastro");
         excluir.addActionListener(new java.awt.event.ActionListener() {
@@ -253,7 +258,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                                             .addComponent(ativo))
                                         .addGap(45, 45, 45)
                                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tabelajScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1176, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,8 +267,8 @@ public class CadastroCliente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(listarClientesJButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buscarClientesjButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(467, 467, 467)
                         .addComponent(excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(242, 242, 242)))
@@ -312,13 +317,13 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(listarClientesJButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buscarClientesjButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(6, 6, 6)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabelajScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -330,35 +335,47 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         //Cliente c;//new Cliente(this.nome,this.email, this.telefone, this.endereco, this.numero, this.bairro, this.cep, this.ativo);
         
-        c = new Cliente<Cliente>(this.nome.getText(),this.email.getText(), this.telefone.getText(), this.endereco.getText(),this.numero.getComponentCount(), this.bairro.getText(), this.cep.getComponentCount() , true);
-        listClientes.add(c.[tamanhoArray]);
+        c[tabelaLista.getRowCount()] = new Cliente(null,null, null, null, 0, null, 0, true);
+        listClientes.add(c[tabelaLista.getRowCount()]);
         tamanhoArray++;
         
-        int numerolinhas = TabelaCadastro.getRowCount()-1;
-        TabelaCadastro.setRowSelectionInterval(numerolinhas, numerolinhas);
+        int numerolinhas = tabelaLista.getRowCount()-1;
+        tabelaLista.setRowSelectionInterval(numerolinhas, numerolinhas);
         nome.requestFocus();
         
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void listarClientesJButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarClientesJButton2MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
+        DefaultTableModel tabelaLista = new DefaultTableModel();
+        tabelaLista.setNumRows(0);
+        
+        ClienteDAO clienteDAO = new ClienteDAO();
+        
+        for(Cliente c: clienteDAO.listarClientes()){
+            tabelaLista.addRow(new Object[][
+                c.getId(), c.getNome(), c.getEmail(), c.getTelefone(), c.getEndereco(),
+                c.getNumero(), c.getBairro(), c.getCep(), c.isAtivo()]);
+        }
+        
+        
+    }//GEN-LAST:event_listarClientesJButton2MouseClicked
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    private void buscarClientesjButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarClientesjButton3MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_buscarClientesjButton3MouseClicked
 
     private void numeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numeroActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void buscarClientesjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarClientesjButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_buscarClientesjButton3ActionPerformed
 
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
         // TODO add your handling code here:
-        int i = TabelaCadastro.getSelectedRow();
+        int i = tabelaLista.getSelectedRow();
         tamanhoArray--;
         listClientes.remove(i);
          
@@ -370,10 +387,9 @@ public class CadastroCliente extends javax.swing.JFrame {
         try {
             if(clienteStatus){
                 
-                c.add(new Cliente(this.nome.getText(),this.email.getText(), this.telefone.getText(), this.endereco.getText(),this.numero.getComponentCount(), this.bairro.getText(), this.cep.getComponentCount() , true));
-                
-                ClienteDAO daoAtual = new ClienteDAO();
-                daoAtual.criar(c[tamanhoArray]);
+                c[tabelaLista.getRowCount()]=(new Cliente(this.nome.getText(),this.email.getText(), this.telefone.getText(), this.endereco.getText(),Integer.parseInt(this.numero.getText()), this.bairro.getText(), Integer.parseInt(this.cep.getText()) , true));
+                daoAtual = new ClienteDAO();
+                daoAtual.criar(c[tabelaLista.getRowCount()]);
                 clienteStatus=false;
 
             }
@@ -389,19 +405,16 @@ public class CadastroCliente extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelaCadastro;
     private javax.swing.JCheckBox ativo;
     private javax.swing.JTextField bairro;
+    private javax.swing.JButton buscarClientesjButton3;
     private javax.swing.JTextField cep;
     private javax.swing.JTextField email;
     private javax.swing.JTextField endereco;
     private javax.swing.JButton excluir;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBairro;
     private javax.swing.JLabel labelCEP;
     private javax.swing.JLabel labelEmal;
@@ -411,8 +424,11 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel labelStatus;
     private javax.swing.JLabel labelTelefone;
     private java.util.List<Cliente> listClientes;
+    private javax.swing.JButton listarClientesJButton2;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField numero;
+    private javax.swing.JTable tabelaLista;
+    private javax.swing.JScrollPane tabelajScrollPane1;
     private javax.swing.JTextField telefone;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
