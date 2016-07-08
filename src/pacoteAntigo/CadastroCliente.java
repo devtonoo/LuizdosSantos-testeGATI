@@ -5,8 +5,12 @@
  */
 package pacoteAntigo;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.jdesktop.observablecollections.ObservableCollections.*;
 /**
  *
@@ -25,6 +29,9 @@ public class CadastroCliente extends javax.swing.JFrame {
     public CadastroCliente() {
         c = new Cliente[100];
         initComponents();
+        
+        
+
     }
 
     /**
@@ -347,20 +354,32 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     private void listarClientesJButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarClientesJButton2MouseClicked
         // TODO add your handling code here:
-        DefaultTableModel tabelaLista = new DefaultTableModel();
-        tabelaLista.setNumRows(0);
-        
-        ClienteDAO clienteDAO = new ClienteDAO();
-        
-        for(Cliente c: clienteDAO.listarClientes()){
-            tabelaLista.addRow(new Object[][
-                c.getId(), c.getNome(), c.getEmail(), c.getTelefone(), c.getEndereco(),
-                c.getNumero(), c.getBairro(), c.getCep(), c.isAtivo()]);
+        try{
+            leNovaTabela();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Quebrou no metodo listarClientes Jbutton.   "+ e);
         }
-        
-        
     }//GEN-LAST:event_listarClientesJButton2MouseClicked
 
+    public void leNovaTabela() throws SQLException{
+        //DefaultTableModel modelo = (DefaultTableModel) this.tabelaLista.getModel();
+        //this.tabelaLista.setRowSorter(new TableRowSorter (modelo));
+        (DefaultTableModel) this.tabelaLista.setNumRows(0);
+        
+        ClienteDAO cDAO;
+        try {
+            cDAO = new ClienteDAO();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Quebrou na instanciação de cDao variavel do tipo ClienteDAO.   "+ex);
+        }
+        
+        for(Cliente cli: cDAO.listarClientes()){
+            (DefaultTableModel) this.tabelaLista.addRow(new Object[][
+                cli.getId(), cli.getNome(), cli.getEmail(), cli.getTelefone(), cli.getEndereco(),
+                cli.getNumero(), cli.getBairro(), cli.getCep(), cli.isAtivo()]);
+        }
+    }
+    
     private void buscarClientesjButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarClientesjButton3MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarClientesjButton3MouseClicked
@@ -394,7 +413,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
             }
 
-        } catch (Exception e) { 
+        } catch (NumberFormatException | SQLException e) { 
             JOptionPane.showMessageDialog(null, "Não Conectado!");
         }
         
